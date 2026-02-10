@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main',
+                git branch: 'gh-pages',
                     credentialsId: "${GITHUB_CREDENTIALS}",
                     url: "${REPO_URL}"
             }
