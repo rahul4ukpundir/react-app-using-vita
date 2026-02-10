@@ -26,6 +26,12 @@ pipeline {
                 bat 'npm run build'
             }
         }
+        stage('Configure Git') { 
+            steps { 
+                bat 'git config --global user.name "Rahul Pundir"'
+                bat 'git config --global user.email "rahul4ukpundir@gmail.com"' 
+                } 
+            }
         stage('Deploy to GitHub Pages') {
             steps {
                 bat 'npm run deploy'
