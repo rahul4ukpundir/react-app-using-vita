@@ -37,7 +37,7 @@ pipeline {
         stage('Deploy to GitHub Pages') {
             steps {
                 // Use npx so Jenkins doesn’t rely on global PATH
-                bat 'npx gh-pages -d dist --verbose'
+                bat 'npx gh-pages -d dist'
             }
         }
     }
