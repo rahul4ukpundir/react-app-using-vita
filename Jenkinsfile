@@ -26,12 +26,12 @@ pipeline {
                 bat 'npm run build'
             }
         }
-
         stage('Deploy to GitHub Pages') {
             steps {
-                bat 'npm install -g gh-pages'
-                bat 'gh-pages -d build'
-            }
-        }
+                bat 'npm run deploy'
+    }
+}
+
+        
     }
 }
