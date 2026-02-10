@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        GITHUB_CREDENTIALS = 'github-creds'
-        REPO_URL = 'https://github.com/<your-username>/<your-repo>.git'
+        GITHUB_CREDENTIALS = '250c937d-0dff-4fe2-bc0d-8c8cfd309f76'
+        REPO_URL = 'https://github.com/rahul4ukpundir/react-app-using-vita.git'
     }
 
     stages {
