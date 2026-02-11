@@ -3,18 +3,11 @@ pipeline {
 
     environment {
         GITHUB_CREDENTIALS = '250c937d-0dff-4fe2-bc0d-8c8cfd309f76'
-        REPO_URL = 'https://github.com/rahul4ukpundir/react-app-using-vita.git'  // Jenkins credential ID for GitHub PAT
-        MY_SECRET_VAR = credentials('GITHUB_REPO_URL')
+        REPO_URL = 'https://github.com/rahul4ukpundir/react-app-using-vita.git'
+        GITHUB_REPO_URL= credentials('GITHUB_REPO_URL')
     }
 
     stages {
-        stage('Test environment variable') {
-            steps {
-                echo "Secret is hidden but available"
-                sh 'echo $MY_SECRET_VAR'
-            }
-        }
-
         stage('Checkout') {
             steps {
                 git branch: 'main',
@@ -26,11 +19,13 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 bat 'npm install'
+
             }
         }
 
         stage('Build React/Vite App') {
             steps {
+                echo "GitHub Repo URL: ${GITHUB_REPO_URL}"
                 bat 'npm run build'
                 bat 'dir dist'  // Verify dist folder exists
             }
