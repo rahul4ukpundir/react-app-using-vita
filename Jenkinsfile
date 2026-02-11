@@ -39,11 +39,10 @@ pipeline {
         stage('Deploy to GitHub Pages') {
             steps {
                 echo 'Starting GitHub Pages deployment...'
-                // Add remote tracking and use GitHub token for authentication
-                withCredentials([string(credentialsId: "${GITHUB_CREDENTIALS}", variable: 'GITHUB_TOKEN')]) {
+                // Use username/password credentials
+                withCredentials([usernamePassword(credentialsId: "${GITHUB_CREDENTIALS}", usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                     bat '''
-                        set GH_TOKEN=%GITHUB_TOKEN%
-                        npx gh-pages -d dist --repo https://%GITHUB_TOKEN%@github.com/rahul4ukpundir/react-app-using-vita.git
+                        npx gh-pages -d dist --repo https://%GIT_USERNAME%:%GIT_PASSWORD%@github.com/rahul4ukpundir/react-app-using-vita.git
                     '''
                 }
                 echo 'Deployment complete!'
