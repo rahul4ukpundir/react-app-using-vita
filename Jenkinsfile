@@ -12,7 +12,7 @@ pipeline {
             steps {
                 git branch: 'main',
                     credentialsId: "${GITHUB_CREDENTIALS}",
-                    url: "${REPO_URL}"
+                    url: "${GITHUB_REPO_URL}"
             }
         }
 
@@ -25,7 +25,6 @@ pipeline {
 
         stage('Build React/Vite App') {
             steps {
-                echo "GitHub Repo URL: ${GITHUB_REPO_URL}"
                 bat 'npm run build'
                 bat 'dir dist'  // Verify dist folder exists
             }
