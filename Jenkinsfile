@@ -24,6 +24,7 @@ pipeline {
         stage('Build React/Vite App') {
             steps {
                 bat 'npm run build'
+                bat 'dir dist'  // Verify dist folder exists
             }
         }
 
@@ -31,13 +32,16 @@ pipeline {
             steps {
                 bat 'git config --global user.name "Your Name"'
                 bat 'git config --global user.email "your-email@example.com"'
+                bat 'git config --global credential.helper store'
             }
         }
 
         stage('Deploy to GitHub Pages') {
             steps {
-                // Use npx so Jenkins doesn’t rely on global PATH
-                bat 'npx gh-pages -d dist'
+                echo 'Starting GitHub Pages deployment...'
+                // Use verbose mode for debugging
+                bat 'npx gh-pages -d dist -v'
+                echo 'Deployment complete!'
             }
         }
     }
