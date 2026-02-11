@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
- GITHUB_CREDENTIALS = '250c937d-0dff-4fe2-bc0d-8c8cfd309f76'
+        GITHUB_CREDENTIALS = '250c937d-0dff-4fe2-bc0d-8c8cfd309f76'
         REPO_URL = 'https://github.com/rahul4ukpundir/react-app-using-vita.git'  // Jenkins credential ID for GitHub PAT
     }
 
@@ -30,17 +30,22 @@ pipeline {
 
         stage('Configure Git Identity') {
             steps {
-                bat 'git config --global user.name "Your Name"'
-                bat 'git config --global user.email "your-email@example.com"'
+                bat 'git config --global user.name "Rahul Pundir"'
+                bat 'git config --global user.email "rahul4ukpundir@gmail.com"'
                 bat 'git config --global credential.helper store'
             }
-        }
+        }az
 
         stage('Deploy to GitHub Pages') {
             steps {
                 echo 'Starting GitHub Pages deployment...'
-                // Use verbose mode for debugging
-                bat 'npx gh-pages -d dist -v'
+                // Add remote tracking and use GitHub token for authentication
+                withCredentials([string(credentialsId: "${GITHUB_CREDENTIALS}", variable: 'GITHUB_TOKEN')]) {
+                    bat '''
+                        set GH_TOKEN=%GITHUB_TOKEN%
+                        npx gh-pages -d dist --repo https://%GITHUB_TOKEN%@github.com/rahul4ukpundir/react-app-using-vita.git
+                    '''
+                }
                 echo 'Deployment complete!'
             }
         }
