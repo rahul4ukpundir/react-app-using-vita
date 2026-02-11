@@ -34,7 +34,7 @@ pipeline {
                 bat 'git config --global user.email "rahul4ukpundir@gmail.com"'
                 bat 'git config --global credential.helper store'
             }
-        }az
+        }
 
         stage('Deploy to GitHub Pages') {
             steps {
